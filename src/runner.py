@@ -48,8 +48,8 @@ def run(use_sample: bool = False, max_candidates: int = None):
         scored.append(result)
 
     # Sort by score descending
-    scored.sort(key=lambda x: x["score"], reverse=True)
-    
+    scored.sort(key=lambda x: (-x["score"], x["candidate_id"]))
+
 # Only keep top 100 for submission
     scored = scored[:100]
 

@@ -356,6 +356,54 @@ def get_career_semantic_score(career: List[Dict]) -> float:
 
     return min(1.0, score)
 
+def detect_honeypot(candidate: Dict) -> bool:
+    """
+    Detect honeypot candidates with subtly impossible profiles.
+    Tightened thresholds based on dataset calibration (~80 expected honeypots).
+    """
+    profile = candidate.get("profile", {})
+    career = candidate.get("career_history", [])
+    skills = candidate.get("skills", [])
+    redrob = candidate.get("redrob_signals", {})
+
+    # Check 1: Expert proficiency with near-zero duration — strongest signal
+    for skill in skills:
+        proficiency = skill.get("proficiency", "")
+        duration = skill.get("duration_months", 0)
+        if proficiency == "expert" and duration < 6:
+            return True
+
+    # Check 2: Total years of experience wildly exceeds career history
+    # Tightened from 2.5x to 3x to reduce false positives
+    years_claimed = profile.get("years_of_experience", 0)
+    total_months_in_history = sum(j.get("duration_months", 0) for j in career)
+    years_from_history = total_months_in_history / 12.0
+
+    if years_claimed > 0 and years_from_history > 0:
+        if years_claimed > years_from_history * 3.0:
+            return True
+
+    # Check 3: A single role's duration exceeds total claimed experience
+    # (i.e., a job that's literally longer than their whole career)
+    for job in career:
+        job_years = job.get("duration_months", 0) / 12.0
+        if job_years > years_claimed + 2:  # +2 buffer to avoid false positives
+            return True
+
+    # Check 4: Impossible/out-of-range platform values only
+    if redrob.get("github_activity_score", 0) > 100:
+        return True
+    if redrob.get("recruiter_response_rate", 0) > 1.0:
+        return True
+    if redrob.get("interview_completion_rate", 0) > 1.0:
+        return True
+
+    # Removed endorsement_mismatch check — too many false positives (210 hits)
+    # Endorsements can legitimately exceed 3x connections if endorsed
+    # before connections grew, so this isn't a reliable honeypot signal
+
+    return False
+
 def score_candidate_for_jd(candidate: Dict) -> Dict:
     """Score a candidate against the Senior AI Engineer JD."""
     cid = candidate.get("candidate_id")
@@ -363,6 +411,8 @@ def score_candidate_for_jd(candidate: Dict) -> Dict:
     career = candidate.get("career_history", [])
     skills = candidate.get("skills", [])
     redrob = candidate.get("redrob_signals", {})
+    # Honeypot check — force to bottom if detected
+    is_honeypot = detect_honeypot(candidate)
 
     # --- Component Scores ---
 
@@ -438,12 +488,19 @@ def score_candidate_for_jd(candidate: Dict) -> Dict:
     # Hard cap at 1.0
     final_score = min(1.0, round(final_score, 4))
 
+    # Force honeypots to near-zero score
+    if is_honeypot:
+        final_score = 0.001
+
     # Reasoning string matching sample_submission.csv format
-    reasoning = (
-        f"{current_title} with {years} yrs; "
-        f"{ai_count} AI core skills; "
-        f"response rate {redrob.get('recruiter_response_rate', 0):.2f}"
-    )
+    if is_honeypot:
+        reasoning = "Profile flagged as inconsistent (honeypot signal detected) — excluded from consideration."
+    else:
+        reasoning = (
+            f"{current_title} with {years} yrs; "
+            f"{ai_count} AI core skills; "
+            f"response rate {redrob.get('recruiter_response_rate', 0):.2f}"
+        )
 
     return {
         "candidate_id": cid,

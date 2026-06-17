@@ -1,3 +1,6 @@
+# NOTE: Not used at submission time. See README "Two design iterations" —
+# this is the generic multi-signal scorer from our first pipeline design.
+# The live ranker is src/data_loader.py + src/runner.py.
 from dataclasses import dataclass, field
 from typing import Dict, List, Tuple
 

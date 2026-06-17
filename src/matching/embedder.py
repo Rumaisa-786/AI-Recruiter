@@ -1,3 +1,7 @@
+# NOTE: Not used at submission time. See README "Two design iterations" —
+# dense embeddings were explored here but dropped to meet the CPU-only /
+# no-network compute budget. The live ranker is
+# src/data_loader.py + src/runner.py.
 from sentence_transformers import SentenceTransformer, CrossEncoder
 import numpy as np
 import faiss

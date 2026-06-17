@@ -416,38 +416,6 @@
     "rank": 13
   },
   {
-    "candidate_id": "CAND_0055905",
-    "score": 0.9353,
-    "reasoning": "Senior Machine Learning Engineer with 8.1 yrs; 10 AI core skills; response rate 0.87",
-    "_breakdown": {
-      "ai_skills_score": 0.931,
-      "ai_skill_count": 10,
-      "avg_proficiency": 3.5,
-      "title_score": 1.0,
-      "current_title": "Senior Machine Learning Engineer",
-      "exp_score": 0.9,
-      "years": 8.1,
-      "availability_score": 1.0,
-      "response_rate": 0.87,
-      "company_score": 0.833,
-      "is_consulting_only": false,
-      "location_score": 0.3,
-      "location": "London",
-      "notice_score": 1.0,
-      "notice_days": 30,
-      "platform_score": 0.459,
-      "matched_ai_skills": [
-        "Elasticsearch",
-        "Hugging Face Transformers",
-        "Speech Recognition",
-        "LangChain",
-        "LLMs",
-        "OpenSearch"
-      ]
-    },
-    "rank": 14
-  },
-  {
     "candidate_id": "CAND_0025335",
     "score": 0.9325,
     "reasoning": "Data Scientist with 6.6 yrs; 8 AI core skills; response rate 0.39",
@@ -477,7 +445,7 @@
         "PEFT"
       ]
     },
-    "rank": 15
+    "rank": 14
   },
   {
     "candidate_id": "CAND_0098780",
@@ -509,7 +477,7 @@
         "Pinecone"
       ]
     },
-    "rank": 16
+    "rank": 15
   },
   {
     "candidate_id": "CAND_0052682",
@@ -541,7 +509,7 @@
         "LLMs"
       ]
     },
-    "rank": 17
+    "rank": 16
   },
   {
     "candidate_id": "CAND_0018499",
@@ -573,7 +541,7 @@
         "Milvus"
       ]
     },
-    "rank": 18
+    "rank": 17
   },
   {
     "candidate_id": "CAND_0002025",
@@ -605,7 +573,7 @@
         "QLoRA"
       ]
     },
-    "rank": 19
+    "rank": 18
   },
   {
     "candidate_id": "CAND_0075249",
@@ -637,7 +605,7 @@
         "Pinecone"
       ]
     },
-    "rank": 20
+    "rank": 19
   },
   {
     "candidate_id": "CAND_0031752",
@@ -669,7 +637,7 @@
         "Speech Recognition"
       ]
     },
-    "rank": 21
+    "rank": 20
   },
   {
     "candidate_id": "CAND_0050876",
@@ -701,7 +669,7 @@
         "OpenSearch"
       ]
     },
-    "rank": 22
+    "rank": 21
   },
   {
     "candidate_id": "CAND_0071974",
@@ -733,7 +701,7 @@
         "Machine Learning"
       ]
     },
-    "rank": 23
+    "rank": 22
   },
   {
     "candidate_id": "CAND_0018549",
@@ -765,39 +733,7 @@
         "Fine-tuning LLMs"
       ]
     },
-    "rank": 24
-  },
-  {
-    "candidate_id": "CAND_0049896",
-    "score": 0.9193,
-    "reasoning": "Search Engineer with 7.3 yrs; 10 AI core skills; response rate 0.43",
-    "_breakdown": {
-      "ai_skills_score": 0.907,
-      "ai_skill_count": 10,
-      "avg_proficiency": 3.5,
-      "title_score": 1.0,
-      "current_title": "Search Engineer",
-      "exp_score": 1.0,
-      "years": 7.3,
-      "availability_score": 0.75,
-      "response_rate": 0.43,
-      "company_score": 0.75,
-      "is_consulting_only": false,
-      "location_score": 0.7,
-      "location": "Vizag, Andhra Pradesh",
-      "notice_score": 0.5,
-      "notice_days": 90,
-      "platform_score": 0.528,
-      "matched_ai_skills": [
-        "LangChain",
-        "LlamaIndex",
-        "Sentence Transformers",
-        "PyTorch",
-        "GANs",
-        "Information Retrieval"
-      ]
-    },
-    "rank": 25
+    "rank": 23
   },
   {
     "candidate_id": "CAND_0009024",
@@ -829,7 +765,7 @@
         "TTS"
       ]
     },
-    "rank": 26
+    "rank": 24
   },
   {
     "candidate_id": "CAND_0021973",
@@ -861,7 +797,7 @@
         "OpenSearch"
       ]
     },
-    "rank": 27
+    "rank": 25
   },
   {
     "candidate_id": "CAND_0029367",
@@ -893,7 +829,7 @@
         "FAISS"
       ]
     },
-    "rank": 28
+    "rank": 26
   },
   {
     "candidate_id": "CAND_0066376",
@@ -925,7 +861,7 @@
         "Deep Learning"
       ]
     },
-    "rank": 29
+    "rank": 27
   },
   {
     "candidate_id": "CAND_0026942",
@@ -957,39 +893,7 @@
         "Information Retrieval"
       ]
     },
-    "rank": 30
-  },
-  {
-    "candidate_id": "CAND_0091909",
-    "score": 0.9142,
-    "reasoning": "Machine Learning Engineer with 6.9 yrs; 12 AI core skills; response rate 0.65",
-    "_breakdown": {
-      "ai_skills_score": 0.909,
-      "ai_skill_count": 12,
-      "avg_proficiency": 3.42,
-      "title_score": 1.0,
-      "current_title": "Machine Learning Engineer",
-      "exp_score": 1.0,
-      "years": 6.9,
-      "availability_score": 0.675,
-      "response_rate": 0.65,
-      "company_score": 0.75,
-      "is_consulting_only": false,
-      "location_score": 0.85,
-      "location": "Bangalore, Karnataka",
-      "notice_score": 0.7,
-      "notice_days": 45,
-      "platform_score": 0.668,
-      "matched_ai_skills": [
-        "LLMs",
-        "Image Classification",
-        "Pinecone",
-        "QLoRA",
-        "Qdrant",
-        "OpenSearch"
-      ]
-    },
-    "rank": 31
+    "rank": 28
   },
   {
     "candidate_id": "CAND_0098217",
@@ -1021,7 +925,7 @@
         "Statistical Modeling"
       ]
     },
-    "rank": 32
+    "rank": 29
   },
   {
     "candidate_id": "CAND_0010149",
@@ -1053,7 +957,7 @@
         "PEFT"
       ]
     },
-    "rank": 33
+    "rank": 30
   },
   {
     "candidate_id": "CAND_0008425",
@@ -1085,7 +989,7 @@
         "TensorFlow"
       ]
     },
-    "rank": 34
+    "rank": 31
   },
   {
     "candidate_id": "CAND_0046064",
@@ -1117,7 +1021,7 @@
         "Deep Learning"
       ]
     },
-    "rank": 35
+    "rank": 32
   },
   {
     "candidate_id": "CAND_0062009",
@@ -1149,7 +1053,7 @@
         "TTS"
       ]
     },
-    "rank": 36
+    "rank": 33
   },
   {
     "candidate_id": "CAND_0080291",
@@ -1181,7 +1085,7 @@
         "TTS"
       ]
     },
-    "rank": 37
+    "rank": 34
   },
   {
     "candidate_id": "CAND_0043860",
@@ -1213,7 +1117,7 @@
         "Vector Search"
       ]
     },
-    "rank": 38
+    "rank": 35
   },
   {
     "candidate_id": "CAND_0015057",
@@ -1245,7 +1149,39 @@
         "Image Classification"
       ]
     },
-    "rank": 39
+    "rank": 36
+  },
+  {
+    "candidate_id": "CAND_0055905",
+    "score": 0.9052,
+    "reasoning": "Senior Machine Learning Engineer with 8.1 yrs; 10 AI core skills; response rate 0.87",
+    "_breakdown": {
+      "ai_skills_score": 0.931,
+      "ai_skill_count": 10,
+      "avg_proficiency": 3.5,
+      "title_score": 1.0,
+      "current_title": "Senior Machine Learning Engineer",
+      "exp_score": 0.9,
+      "years": 8.1,
+      "availability_score": 0.75,
+      "response_rate": 0.87,
+      "company_score": 0.833,
+      "is_consulting_only": false,
+      "location_score": 0.3,
+      "location": "London",
+      "notice_score": 1.0,
+      "notice_days": 30,
+      "platform_score": 0.459,
+      "matched_ai_skills": [
+        "Elasticsearch",
+        "Hugging Face Transformers",
+        "Speech Recognition",
+        "LangChain",
+        "LLMs",
+        "OpenSearch"
+      ]
+    },
+    "rank": 37
   },
   {
     "candidate_id": "CAND_0050454",
@@ -1277,7 +1213,7 @@
         "Qdrant"
       ]
     },
-    "rank": 40
+    "rank": 38
   },
   {
     "candidate_id": "CAND_0064888",
@@ -1309,7 +1245,7 @@
         "Speech Recognition"
       ]
     },
-    "rank": 41
+    "rank": 39
   },
   {
     "candidate_id": "CAND_0011687",
@@ -1341,7 +1277,7 @@
         "LangChain"
       ]
     },
-    "rank": 42
+    "rank": 40
   },
   {
     "candidate_id": "CAND_0078002",
@@ -1373,7 +1309,7 @@
         "Weaviate"
       ]
     },
-    "rank": 43
+    "rank": 41
   },
   {
     "candidate_id": "CAND_0088025",
@@ -1405,7 +1341,7 @@
         "TensorFlow"
       ]
     },
-    "rank": 44
+    "rank": 42
   },
   {
     "candidate_id": "CAND_0000031",
@@ -1437,7 +1373,7 @@
         "Speech Recognition"
       ]
     },
-    "rank": 45
+    "rank": 43
   },
   {
     "candidate_id": "CAND_0006557",
@@ -1469,7 +1405,7 @@
         "FAISS"
       ]
     },
-    "rank": 46
+    "rank": 44
   },
   {
     "candidate_id": "CAND_0096142",
@@ -1501,7 +1437,7 @@
         "RAG"
       ]
     },
-    "rank": 47
+    "rank": 45
   },
   {
     "candidate_id": "CAND_0045475",
@@ -1533,7 +1469,7 @@
         "OpenSearch"
       ]
     },
-    "rank": 48
+    "rank": 46
   },
   {
     "candidate_id": "CAND_0047907",
@@ -1565,7 +1501,7 @@
         "Hugging Face Transformers"
       ]
     },
-    "rank": 49
+    "rank": 47
   },
   {
     "candidate_id": "CAND_0073982",
@@ -1595,6 +1531,70 @@
         "RAG",
         "FAISS",
         "Elasticsearch"
+      ]
+    },
+    "rank": 48
+  },
+  {
+    "candidate_id": "CAND_0086151",
+    "score": 0.8981,
+    "reasoning": "Recommendation Systems Engineer with 7.7 yrs; 11 AI core skills; response rate 0.52",
+    "_breakdown": {
+      "ai_skills_score": 0.883,
+      "ai_skill_count": 11,
+      "avg_proficiency": 3.36,
+      "title_score": 1.0,
+      "current_title": "Recommendation Systems Engineer",
+      "exp_score": 1.0,
+      "years": 7.7,
+      "availability_score": 0.675,
+      "response_rate": 0.52,
+      "company_score": 0.667,
+      "is_consulting_only": false,
+      "location_score": 0.7,
+      "location": "Vizag, Andhra Pradesh",
+      "notice_score": 0.25,
+      "notice_days": 120,
+      "platform_score": 0.674,
+      "matched_ai_skills": [
+        "LangChain",
+        "BentoML",
+        "Recommendation Systems",
+        "Qdrant",
+        "OpenSearch",
+        "Embeddings"
+      ]
+    },
+    "rank": 49
+  },
+  {
+    "candidate_id": "CAND_0081053",
+    "score": 0.8972,
+    "reasoning": "NLP Engineer with 5.4 yrs; 10 AI core skills; response rate 0.83",
+    "_breakdown": {
+      "ai_skills_score": 0.897,
+      "ai_skill_count": 10,
+      "avg_proficiency": 3.6,
+      "title_score": 1.0,
+      "current_title": "NLP Engineer",
+      "exp_score": 0.9,
+      "years": 5.4,
+      "availability_score": 0.75,
+      "response_rate": 0.83,
+      "company_score": 0.75,
+      "is_consulting_only": false,
+      "location_score": 0.7,
+      "location": "Chandigarh, Chandigarh",
+      "notice_score": 0.5,
+      "notice_days": 90,
+      "platform_score": 0.765,
+      "matched_ai_skills": [
+        "LoRA",
+        "QLoRA",
+        "Qdrant",
+        "Machine Learning",
+        "Learning to Rank",
+        "Image Classification"
       ]
     },
     "rank": 50

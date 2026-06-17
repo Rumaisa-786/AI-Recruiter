@@ -1,3 +1,8 @@
+# NOTE: Not used at submission time. See README "Two design iterations" —
+# this 5-stage hybrid pipeline (dense + BM25 + cross-encoder + LLM pass) was
+# our first design but can't fit the 100k-candidate / 5-min / CPU-only /
+# no-network budget enforced at submission. The live ranker is
+# src/data_loader.py + src/runner.py.
 from typing import List, Dict, Tuple
 import numpy as np
 from sentence_transformers import CrossEncoder
