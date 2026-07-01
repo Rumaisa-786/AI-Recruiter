@@ -8,6 +8,8 @@ from pathlib import Path
 from typing import List, Dict, Generator
 from datetime import datetime, date
 from tqdm import tqdm
+from src.jd_parser import parse_job_description
+from src.skill_matcher import extract_candidate_skills, match_skills
 
 
 # STRICT AI/ML core skills — only real AI/ML skills count
@@ -108,40 +110,66 @@ def load_candidates_json(path: str) -> List[Dict]:
         return json.load(f)
 
 
+# Parse once when the module loads
+JD_PROFILE = parse_job_description("data/jobs/job_description.docx")
+
+
 def count_ai_skills(skills: List[Dict]) -> tuple:
     """
-    Strictly count AI/ML skills only.
-    Excludes infrastructure, frontend, and database skills.
+    Match candidate skills against the actual Job Description
+    instead of a hardcoded AI skill list.
     """
-    proficiency_scores = {"beginner": 1, "intermediate": 2, "advanced": 3, "expert": 4}
+
+    proficiency_scores = {
+        "beginner": 1,
+        "intermediate": 2,
+        "advanced": 3,
+        "expert": 4,
+    }
+
+    # Candidate skills
+    candidate_skills = extract_candidate_skills(skills)
+
+    # JD-required skills
+    jd_skills = JD_PROFILE["skills"]
+
+    # Match candidate ↔ JD
+    match = match_skills(candidate_skills, jd_skills)
+
+    matched_names = match["matched"]
 
     matched = []
     proficiency_total = 0
 
     for skill in skills:
-        skill_name = skill.get("name", "").lower().strip()
 
-        # Skip if it's a known non-AI skill
-        if skill_name in NON_AI_SKILLS:
-            continue
-        if any(non_ai in skill_name for non_ai in NON_AI_SKILLS):
-            continue
+        skill_name = skill.get("name", "").lower()
 
-        # Check if it matches AI skills
-        is_ai = False
-        for ai_skill in AI_CORE_SKILLS:
-            if ai_skill in skill_name or skill_name in ai_skill:
-                is_ai = True
+        for matched_skill in matched_names:
+
+            if (
+                matched_skill in skill_name
+                or skill_name in matched_skill
+            ):
+                matched.append(skill)
+
+                proficiency_total += proficiency_scores.get(
+                    skill.get("proficiency", "beginner"),
+                    1,
+                )
                 break
 
-        if is_ai:
-            matched.append(skill)
-            proficiency_total += proficiency_scores.get(
-                skill.get("proficiency", "beginner"), 1
-            )
+    avg_proficiency = (
+        proficiency_total / len(matched)
+        if matched
+        else 0
+    )
 
-    avg_proficiency = proficiency_total / len(matched) if matched else 0
-    return len(matched), matched, avg_proficiency
+    return (
+        len(matched),
+        matched,
+        avg_proficiency,
+    )
 
 
 def get_title_score(current_title: str) -> float:
@@ -282,18 +310,44 @@ def get_company_quality(career: List[Dict]) -> tuple:
 
 
 def get_location_score(profile: Dict) -> float:
+    """
+    Stronger location scoring aligned with the JD.
+    """
+
     location = profile.get("location", "").lower()
     country = profile.get("country", "").lower()
 
-    if country != "india" and "india" not in location:
-        return 0.3  # Outside India
+    preferred = {
+        "pune",
+        "noida",
+        "gurugram",
+        "delhi",
+        "ncr",
+    }
 
-    if any(loc in location for loc in INDIA_TOP_LOCATIONS):
-        return 1.0  # Perfect — Pune/Noida/Hyderabad/Delhi
-    if any(loc in location for loc in INDIA_OK_LOCATIONS):
-        return 0.85  # Good India city
+    acceptable = {
+        "bangalore",
+        "bengaluru",
+        "hyderabad",
+        "mumbai",
+        "chennai",
+        "india",
+    }
 
-    return 0.7  # India but smaller city
+    # Outside India
+    if country and country != "india":
+        return 0.15
+
+    if any(city in location for city in preferred):
+        return 1.0
+
+    if any(city in location for city in acceptable):
+        return 0.85
+
+    if "india" in location:
+        return 0.70
+
+    return 0.15
 
 
 def get_notice_score(notice_days: int) -> float:
@@ -322,39 +376,74 @@ def get_platform_score(redrob: Dict) -> float:
         interview_rate * 0.25 +
         saved_by_recruiters * 0.15
     )
-def get_career_semantic_score(career: List[Dict]) -> float:
+def get_career_semantic_score(career: List[Dict], jd_skills=None) -> float:
     """
-    Read actual job descriptions for AI/ML work evidence.
-    This catches candidates who DID the work but didn't list it as a skill.
+    Score candidates based on evidence of production AI work in career history.
+    Rewards actual work done rather than keyword stuffing.
     """
+
     if not career:
         return 0.0
 
-    production_ai_signals = [
-        "recommendation system", "ranking system", "search system",
-        "embedding", "vector", "retrieval", "semantic search",
-        "machine learning model", "ml model", "deployed model",
-        "fine-tun", "llm", "language model", "neural network",
-        "feature pipeline", "training pipeline", "inference",
-        "a/b test", "model evaluation", "ndcg", "precision",
-        "candidate ranking", "reranking", "bert", "transformer",
-        "pytorch", "tensorflow", "hugging face", "scikit",
-        "data science", "model serving", "mlops",
-    ]
+    if jd_skills is None:
+        jd_skills = JD_PROFILE["skills"]
+
+    total_months = sum(job.get("duration_months", 0) for job in career)
 
     score = 0.0
-    total_months = sum(j.get("duration_months", 0) for j in career)
+
+    production_keywords = [
+        "recommendation",
+        "ranking",
+        "retrieval",
+        "semantic search",
+        "vector",
+        "embedding",
+        "ml model",
+        "machine learning",
+        "deep learning",
+        "llm",
+        "transformer",
+        "pytorch",
+        "tensorflow",
+        "model serving",
+        "production",
+        "deployment",
+        "inference",
+        "evaluation",
+        "a/b",
+        "offline evaluation",
+        "online evaluation",
+    ]
 
     for job in career:
-        desc = job.get("description", "").lower()
+
+        description = job.get("description", "").lower()
+
         months = job.get("duration_months", 0)
-        weight = months / total_months if total_months > 0 else 0
 
-        matches = sum(1 for signal in production_ai_signals if signal in desc)
-        job_score = min(1.0, matches / 5.0)
-        score += job_score * weight
+        weight = months / total_months if total_months else 0
 
-    return min(1.0, score)
+        keyword_matches = 0
+
+        for keyword in production_keywords:
+            if keyword in description:
+                keyword_matches += 1
+
+        jd_matches = 0
+
+        for skill in jd_skills:
+            if skill in description:
+                jd_matches += 1
+
+        job_score = (
+            0.6 * min(keyword_matches / 6, 1.0)
+            + 0.4 * min(jd_matches / max(len(jd_skills), 1), 1.0)
+        )
+
+        score += weight * job_score
+
+    return round(min(score, 1.0), 3)
 
 def detect_honeypot(candidate: Dict) -> bool:
     """
