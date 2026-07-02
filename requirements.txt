@@ -2,3 +2,6 @@ gradio
 pandas
 tqdm
 plotly
+streamlit
+plotly
+python-docx
